@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Floral Collection</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("https://i.ibb.co/xSTtfzyG/Whats-App-Image-2025-08-25-at-01-48-13-019aab8b.jpg") no-repeat center center/cover;
+      position: relative;
+    }
+
+    /* Dark overlay */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(3px);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      color: white;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #f8dada;
+      letter-spacing: 1px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label { display: block; margin-bottom: 6px; color: #ddd; }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      transition: 0.3s;
+    }
+    input:focus {
+      background: rgba(255,255,255,0.3);
+      box-shadow: 0 0 8px #bb9090;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #bb9090, #a67d7d);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #a67d7d, #bb9090);
+    }
+
+    .link { margin-top: 15px; font-size: 14px; color: #ddd; }
+    .link a { color: #f8dada; text-decoration: none; }
+    .link a:hover { text-decoration: underline; }
+
+    .error { color: #ff8a8a; font-size: 14px; margin-bottom: 12px; }
+    .success { color: #90ee90; font-size: 14px; margin-bottom: 12px; }
+
+    #welcomeSection { display: none; }
+    #welcomeSection p { margin-bottom: 20px; font-size: 16px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- LOGIN FORM -->
+    <div id="loginSection">
+      <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+      <div id="message"></div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="user">Username or Email</label>
+          <input type="text" id="user" name="user" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit"><i class="fas fa-key"></i> Login</button>
+      </form>
+      <div class="link">
+        Don't have an account? <a href="registration.html">Register here</a>
+      </div>
+    </div>
+
+    <!-- WELCOME SECTION -->
+    <div id="welcomeSection">
+      <h2><i class="fas fa-smile"></i> Welcome!</h2>
+      <p id="welcomeMessage"></p>
+      <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const messageDiv = document.getElementById('message');
+    const loginSection = document.getElementById('loginSection');
+    const welcomeSection = document.getElementById('welcomeSection');
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    function showWelcome(user) {
+      loginSection.style.display = 'none';
+      welcomeSection.style.display = 'block';
+      welcomeMessage.textContent = `Hello, ${user.name}! You are logged in as ${user.username}.`;
+    }
+
+    function checkLoggedIn() {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if(currentUser) showWelcome(currentUser);
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      messageDiv.innerHTML = '';
+
+      const userInput = loginForm.user.value.trim();
+      const passwordInput = loginForm.password.value;
+
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const user = users.find(u => (u.username === userInput || u.email === userInput) && u.password === passwordInput);
+
+      if(user) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        showWelcome(user);
+      } else {
+        messageDiv.innerHTML = '<div class="error">Invalid username/email or password.</div>';
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('currentUser');
+      welcomeSection.style.display = 'none';
+      loginSection.style.display = 'block';
+      loginForm.reset();
+    });
+
+    checkLoggedIn();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+<style>
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #fff0f5;
+  color: #333;
+  line-height: 1.5;
+  padding-top: 140px; /* Reserve space for fixed header + nav */
+}
+
+/* ===== FIXED HEADER & NAV ===== */
+header, nav {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+header {
+  top: 0;
+  background: #b84880;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+nav {
+  top: 60px; /* directly below header */
+  background-color: #e989bb;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 30px;
+  padding: 20px;
+}
+@media (max-width: 768px) {
+  body { padding-top: 120px; }
+  .container { margin: 10px; }
+}
+
+/* ===== PRODUCT DETAILS ===== */
+.product-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 90px;
+}
+.product-left img {
+  width: 100%;
+  max-width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+.product-right { flex: 1; }
+.price { color: #e91e63; font-weight: bold; font-size: 22px; }
+ul { padding-left: 20px; }
+
+/* ===== BUTTONS (Unified Style) ===== */
+button,
+.add-to-cart,
+.order-now-btn,
+#direct-checkout,
+#emailCheckoutBtn {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart,
+.order-now-btn,
+#direct-checkout {
+  background: linear-gradient(135deg, #bb9090, #e989bb);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.add-to-cart:hover,
+.order-now-btn:hover,
+#direct-checkout:hover {
+  background: linear-gradient(135deg, #dd4c86, #b84880);
+  transform: translateY(-2px);
+}
+
+#emailCheckoutBtn {
+  background: #0a3e85;
+  color: white;
+}
+#emailCheckoutBtn:hover {
+  background: #092e65;
+}
+
+/* ===== CART DRAWER ===== */
+#cartDrawer {
+  position: fixed;
+  top: 80px;
+  right: 15px;
+  width: 320px;
+  max-height: 80vh;
+  overflow: auto;
+  background: white;
+  border: 2px solid #473c3c;
+  padding: 15px;
+  display: none;
+  z-index: 1100;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+#cartItems .cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* ===== REVIEWS ===== */
+.reviews {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fff0f5;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.reviews h3 { margin-bottom: 10px; color: #e91e63; }
+.reviews p { margin-bottom: 15px; font-weight: bold; }
+#reviewForm input,
+#reviewForm select,
+#reviewForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+#reviewForm button {
+  background-color: #bb9090;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+#reviewForm button:hover { background-color: #dd4c86; }
+#review-list { list-style-type: none; padding: 0; margin-top: 20px; }
+#review-list li {
+  background: #fff;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-left: 4px solid #e91e63;
+  font-size: 14px;
+  line-height: 1.4;
+}
+/* ===== Add to Cart / Buy Now Button ===== */
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #bb9090;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, bottom 0.5s ease;
+  z-index: 2000;
+}
+.toast.show { opacity: 1; bottom: 50px; }
+
+/* ===== CHECKOUT OVERLAY ===== */
+#checkoutOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+#checkoutOverlay.open { display: flex; }
+#checkoutOverlay .modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease-out;
+}
+#checkoutOverlay input, 
+#checkoutOverlay textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+#checkoutOverlay .modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+/* WhatsApp Button */
+#waCheckoutBtn {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+#waCheckoutBtn:hover { background-color: #1ebe5d; transform: translateY(-2px); }
+#waCheckoutBtn:active { transform: scale(0.96); }
+
+/* ===== PRODUCT MODAL IMAGE (Responsive) ===== */
+#imgModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+}
+#imgModal.open { display: flex; }
+#modalImg {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+#closeImgModal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#closeImgModal:hover { color: #ffb6c1; }
+/* ==== COLOR SELECT STYLE ==== */
+label[for="detailColor"] {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+#detailColor {
+  width: 100%;
+  max-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+#detailColor:hover {
+  border-color: #999;
+}
+
+#detailColor:focus {
+  border-color: #e91e63;   /* highlight with your theme color */
+  box-shadow: 0 0 6px rgba(233, 30, 99, 0.4);
+}
+
+/* ==== BIG BUTTONS (Add to Cart + Buy Now) ==== */
+.add-to-cart,
+#add-to-cart,
+#direct-checkout {
+  display: block;
+  width: 100%;              /* full width inside container */
+  max-width: 350px;         /* limit on desktop */
+  margin: 15px auto;        /* center horizontally */
+  padding: 16px 32px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #bb9090, #e989bb);
+  border: none;
+  border-radius: 50px;      /* pill shape */
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.add-to-cart:hover,
+#add-to-cart:hover,
+#direct-checkout:hover {
+  background: linear-gradient(135deg, #e989bb, #bb9090);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.add-to-cart:active,
+#add-to-cart:active,
+#direct-checkout:active {
+  transform: scale(0.95);
+}
+
+/* 📱 Mobile optimization */
+@media (max-width: 600px) {
+  .add-to-cart,
+  #add-to-cart,
+  #direct-checkout {
+    width: 90%;
+    font-size: 18px;
+    padding: 14px 28px;
+  }
+}
+/* ===== CHECKOUT OVERLAY ===== */
+#checkoutOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 10px; /* prevents content touching edges on mobile */
+}
+#checkoutOverlay.open { display: flex; }
+
+#checkoutOverlay .modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Modal header */
+#checkoutOverlay .modal h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #b84880;
+}
+
+/* Inputs */
+#checkoutOverlay input, 
+#checkoutOverlay textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Actions */
+#checkoutOverlay .modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+#checkoutOverlay .modal-actions button {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* WhatsApp Button */
+#waCheckoutBtn {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+#waCheckoutBtn:hover { background-color: #1ebe5d; transform: translateY(-2px); }
+#waCheckoutBtn:active { transform: scale(0.96); }
+
+/* Email Button */
+#emailCheckoutBtn {
+  background: #0a3e85;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+#emailCheckoutBtn:hover { background: #092e65; }
+
+/* Cancel */
+#cancelCheckoutBtn {
+  background: #ccc;
+  color: #333;
+  border-radius: 8px;
+}
+#cancelCheckoutBtn:hover { background: #aaa; }
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  #checkoutOverlay .modal {
+    padding: 15px;
+    border-radius: 10px;
+  }
+  #checkoutOverlay .modal h3 {
+    font-size: 18px;
+  }
+  #checkoutOverlay .modal-actions {
+    flex-direction: column;
+  }
+  #checkoutOverlay .modal-actions button {
+    width: 100%;
+  }
+}
+
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+   <div class="header">
+    <div class="header-left">
+      <span class="menu-icon" onclick="toggleMenu()">☰</span>
+     <div class="header-center">
+        <img src="https://i.ibb.co/dwkcTHT3/Whats-App-Image-2025-07-30-at-15-01-33-249b3325-removebg-preview.png"
+          alt="Floral Logo" class="logo" />
+        <h1><i>Floral Collection</i></h1>
+    </div>
+  </div> 
+  <div class="header-right">
+    <div class="header-icons">
+      <a href="registration.html" title="Register">
+        <i class="fas fa-user-plus"></i>
+      </a>
+      <div class="search-container">
+        <span class="search-icon" onclick="toggleSearch()">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search..." />
+      </div>
+    </div>
+  </div>
+
+<!-- Cart Icon -->
+<div id="cartIcon">🛒  (<span id="cartCount">0</span>)</div>
+
+<!-- Cart Drawer -->
+<div id="cartDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <strong>Your Cart</strong>
+    <div style="display:flex;gap:8px;align-items:center;margin-top: 10px">
+      <button id="clearCartBtn" class="btn link">Clear</button>
+      <button id="closeCartBtn" class="btn link" aria-label="Close">✕</button>
+    </div>
+  </div>
+  <div id="cartItems" class="drawer-body"></div>
+  <div class="drawer-foot">
+    <div id="cartSummary">
+      <div class="summary-row">
+        <span>Subtotal:</span>
+        <span id="cartSubtotal">PKR 0</span>
+      </div>
+      <div class="summary-row">
+        <span>Delivery:</span>
+        <span id="cartDelivery">PKR 300</span>
+      </div>
+      <div class="summary-row total-row">
+        <strong>Total:</strong>
+        <strong id="cartTotal">PKR 0</strong>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px">
+      <button id="openCheckoutForm" class="btn primary" style="flex:1">Checkout</button>
+      <button id="continueShoppingBtn" class="btn" style="flex:1">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div id="checkoutOverlay">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>Checkout</h3>
+      <button id="closeModalBtn" class="btn link">✕</button>
+    </div>
+    <p style="margin-top:0">Please enter customer details. Choose Email or WhatsApp to send the order.</p>
+    <input id="custName" placeholder="Full name" />
+    <input id="custPhone" placeholder="Phone number" />
+    <textarea id="custAddress" placeholder="Address"></textarea>
+    <textarea id="custNotes" placeholder="Notes (optional)"></textarea>
+    <div class="modal-actions">
+      <button id="emailCheckoutBtn" class="btn primary">Checkout via Email</button>
+      <button id="waCheckoutBtn" class="btn">Checkout via WhatsApp</button>
+      <button id="cancelCheckoutBtn" class="btn link">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"><span class="toast-message"></span></div>
+
+</div>
+</div>
+</header>
+
+<!-- Navigation -->
+<nav>
+  <ul class="nav-menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about-section">About</a></li>
+    <li><a href="mailto:floralcollection001@gmail.com" onclick="toggleMenu()"title="Email us your query">📧 Contact </a></li>
+    <li class="dropdown">
+      <a href="#">Collection ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="chiffon category.html">Chiffon Hijabs</a></li>
+        <li><a href="silk.html">Silk Hijabs</a></li>
+        <li><a href="jersey.html">Jersey Hijabs</a></li>
+        <li><a href="glitter.html">Glitter Georgette Hijabs</a></li>
+        <li><a href="viscose.html">Viscose Hijabs</a></li>
+        <li><a href="deals.html">Hijab Deals</a></li>
+        <li><a href="Accessories.html">Hijab Accessories</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+  <button class="close-btn" onclick="toggleMenu()">×</button>
+  <ul>
+    <li><a href="index.html">🏠Home</a></li>
+    <li><a href="#about-section">🧣About</a></li>
+    <li><a href="chiffon-category.html"> Chiffon Hijabs</a></li>
+    <li><a href="silk.html"> Silk Hijabs</a></li>
+    <li><a href="jersey.html"> Jersey Hijabs</a></li>
+    <li><a href="glitter.html"> Georgette Hijabs</a></li>
+    <li><a href="viscose.html"> Viscose Hijabs</a></li>
+    <li><a href="deals.html"> Hijab Deals</a></li>
+    <li><a href="Accessories.html"> Hijab Accessories</a></li>
+    <li><a href="#" onclick="openContact()" title="Email us your query">📧 Contact</a></li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="product-detail">
+    <div class="product-left">
+      <!-- Dynamic Product Image -->
+      <img id="product-image" src="" alt="Product Image">
+
+    </div>
+    <div class="product-right">
+      <h2 id="product-title"></h2>
+      <p class="price" id="product-price"></p>
+      <p><strong>Availability:</strong> <span id="availability"></span></p>
+      <p> <span id="product-tagline"></span></p>
+      <p id="product-description"></p>
+      <div id="product-description" class="long-description"></div>
+      <ul>
+        <li><strong>Material:</strong> <span id="product-material"></span></li>
+        <li><strong>Contour:</strong> <span id="product-contour"></span></li>
+        <li><strong>Dimensions:</strong> <span id="product-dimensions"></span></li>
+        <li><strong>Texture:</strong> <span id="product-texture"></span></li>
+      </ul>
+      <div id="colorWrapper">
+  <label for="detailColor">Choose a color:</label>
+  <select id="detailColor"></select>
+</div>
+
+       <button id="add-to-cart">Add to Cart</button>
+      <button id="direct-checkout">Buy Now</button>
+    </div>
+  </div>
+</div>
+<!-- ✅ Checkout Modal -->
+<div id="checkoutOverlay" style="display:none;">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>Checkout</h3>
+      <button id="closeModalBtn" class="btn link">✕</button>
+    </div>
+
+    <!-- Order Summary -->
+    <div id="orderSummary" style="background:#f9f9f9;padding:10px;border-radius:8px;margin-bottom:10px;font-size:14px;">
+      <!-- JS will insert product summary here -->
+    </div>
+
+    <p style="margin-top:0">Please enter your details. Choose Email or WhatsApp to place the order.</p>
+
+    <input id="custName" placeholder="Full name" />
+    <input id="custPhone" placeholder="Phone number" />
+    <textarea id="custAddress" placeholder="Address"></textarea>
+    <textarea id="custNotes" placeholder="Notes (optional)"></textarea>
+
+    <div class="modal-actions">
+      <button id="emailCheckoutBtn" class="btn primary">Checkout via Email</button>
+      <button id="waCheckoutBtn" class="btn">Checkout via WhatsApp</button>
+      <button id="cancelCheckoutBtn" class="btn link">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Image Modal -->
+<div id="imgModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+     background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:1000;">
+  <div style="position:relative;">
+    <img id="modalImg" src="" alt="Preview" style="max-width:90%;max-height:90%;border-radius:10px;">
+    <button id="closeImgModal" style="position:absolute;top:-20px;right:-20px;
+            background:#fff;border:none;border-radius:50%;font-size:20px;padding:5px;cursor:pointer;">✕</button>
+  </div>
+</div>
+
+<div class="reviews">
+  <h3>Customer Reviews</h3>
+  <p>Based on <span id="review-count">0</span> reviews</p>
+  <form id="reviewForm">
+    <input type="text" id="name" placeholder="Your Name" required />
+    <select id="rating" required>
+      <option value="">Rate this product</option>
+      <option value="5">★★★★★ (5)</option>
+      <option value="4">★★★★ (4)</option>
+      <option value="3">★★★ (3)</option>
+      <option value="2">★★ (2)</option>
+      <option value="1">★ (1)</option>
+    </select>
+    <textarea id="comment" placeholder="Write your review..." required></textarea>
+    <button type="submit">Submit Review</button>
+  </form>
+  <ul id="review-list"></ul>
+</div>
+<div class="related-products">
+  <h2 style="text-align: center;font-style: italic; font-weight: bold;margin-top: 30px;">You may also like</h2>
+  <div class="related-wrapper">
+    
+  </div>
+</div>
+
+ <div id="policy-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#be7a7a; border:1px solid #cfa0a0; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('policy-popup').style.display='none'">✕</button>
+    <h2>Privacy Policy</h2>
+    <p> At Floral Collection, we value your privacy and are committed to protecting your personal information. Any data
+      you share with us — such as your name, email address, or order details — is used solely to provide a better
+      shopping experience and process your orders. We do not sell, rent, or share your information with third parties
+      for marketing purposes. Your trust means everything to us, and we take appropriate security measures to keep your
+      data safe. By using our website, you agree to the terms outlined in this policy.</p>
+  </div>
+  <!-- Terms & Conditions Popup -->
+  <div id="terms-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#c99696; border:1px solid #ddaeae; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('terms-popup').style.display='none'" style="float:right;">✕</button>
+    <h2>Terms of Service</h2>
+    <p>
+      By using the Floral Collection website, you agree to the following terms and conditions. All products listed are
+      subject to availability and may be withdrawn at any time. Prices are subject to change without prior notice. When
+      placing an order, please ensure your information is accurate. We reserve the right to refuse or cancel any order
+      at our discretion. All content on this website, including images and text, is the property of Floral Collection
+      and may not be used without permission. Use of our site signifies your agreement to comply with these terms.
+    </p>
+  </div>
+
+  <!-- Return & Exchange Policy Popup -->
+  <div id="return-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('return-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Return & Exchange Policy</h2>
+    <p>
+      We offer a 7-day return policy from the date you receive your order. Items must be unworn, unused, with tags, and
+      in original packaging along with proof of purchase. Refunds are only issued for defective or incorrect items. For
+      other concerns like change of mind, only exchanges are allowed. The customer is responsible for sending the item
+      back to our office and covering delivery charges. Exchanges will be processed after inspection.
+    </p>
+    <p>
+      Items on sale are non-refundable and non-exchangeable, unless found defective. Items sent without prior approval
+      will not be accepted.
+    </p>
+    <p>
+      Damaged or incorrect items must be reported immediately upon receiving the package. We do not accept returns for
+      personalized items, perishable goods, personal care products, or hazardous materials. Gift cards and sale items
+      are also non-returnable.
+    </p>
+    <p>
+      Refunds (if approved) will be credited to your original payment method after inspection. Processing time may vary
+      depending on your bank or credit card provider.
+    </p>
+  </div>
+  <div id="our-story-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('our-story-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Our Story</h2>
+    <p>At Floral Collection, our journey began with a simple idea — to celebrate elegance and individuality through
+      timeless fashion. Inspired by nature’s grace and the vibrant charm of floral beauty, we set out to create a brand
+      that blends classic aesthetics with modern sophistication. Each piece in our collection is thoughtfully designed
+      to reflect confidence, comfort, and creativity. What started as a small passion project has grown into a community
+      that values quality, detail, and self-expression. We’re here to help you look good and feel even better — because
+      your style tells your story.
+
+    </p>
+  </div>
+  <div id="contact-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('contact-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Contact Us</h2>
+    <p>We'd love to hear from you! For any questions, collaborations, or feedback, feel free to reach out. The easiest
+      way to contact us is through our gamil<a href="mailto:floralcollection001@gmail.com"style="color: #b36161; text-decoration: underline;">just send us a direct message</a> and we’ll
+      get back to you as soon as possible.</p>
+
+  </div>
+  <div id="blog-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#fff7f7; border:1px solid #e3caca; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('blog-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Floral Blog</h2>
+
+    <div class="blog-post">
+      <h3>🌸 3 Ways to Style Floral Prints This Summer</h3>
+      <p>Floral prints are a timeless classic. Learn how to pair them with neutrals, layer them for cooler evenings, or
+        style them for casual and formal events.</p>
+    </div>
+
+    <div class="blog-post">
+      <h3>👗 Behind the Scenes: Our Design Journey</h3>
+      <p>From sketch to stitch, we pour love into every piece. Discover how your favorite floral dresses are created!
+      </p>
+    </div>
+
+    <div class="blog-post">
+      <h3>💬 Customer Style Moments</h3>
+      <p>See how our beautiful customers style their Floral Collection outfits — and get featured on our page!</p>
+    </div>
+  </div>
+
+  <footer class="site-footer" id="about-section">
+    <div class="footer-top">
+      <div class="footer-newsletter">
+        <h4>Sign up and save</h4>
+        <p>Get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+        <form>
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <div class="link-group">
+        <h5>Collections</h5>
+        <ul>
+          <li><a href="#">Chiffon Hijabs</a></li>
+          <li><a href="#">Silk Hijabs</a></li>
+          <li><a href="#">Glitter Georgette Hijabs</a></li>
+          <li><a href="#">Jersey Hijabs</a></li>
+          <li><a href="#">Hijab Deals</a></li>
+        </ul>
+      </div>
+      <div class="link-group">
+        <h5>About</h5>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('our-story-popup').style.display='block'">Our Story</a></li>
+          <li><a href="#" onclick="document.getElementById('contact-popup').style.display='block'">Contact Us</a></li>
+          <li><a href="#" onclick="document.getElementById('blog-popup').style.display='block'">Blog</a></li>
+
+        </ul>
+      </div>
+      <div class="link-group">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('terms-popup').style.display='block'">Terms of Service</a>
+          </li>
+          <li><a href="#" onclick="document.getElementById('policy-popup').style.display='block'">Privacy Policy</a>
+          </li>
+          <li><a href="#" onclick="document.getElementById('return-popup').style.display='block'">Return Policy</a></li>
+
+        </ul>
+      </div>
+      <div class="social-group">
+        <h5>Follow Us</h5>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/floralcollection_01/" target="_blank" aria-label="Instagram">
+            <img src="icon-instagram.svg" alt="Instagram">
+            <a href="https://www.instagram.com/floralcollection_01/" target="_blank" aria-label="Instagram"><img
+                src="icon-facebook.svg" alt="Facebook"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Floral Collection. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="cart.js"></script>
+  <script src="styles.js"></script>
+  <script src="product.js"></script>
+<script>
+// details.js
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+
+  if (!productId || !products[productId]) {
+    document.querySelector(".container").innerHTML = "<h2>Product not found</h2>";
+    return;
+  }
+
+  const product = products[productId];
+
+  // Fill product details
+  $("#product-image").src = product.img;
+  $("#product-title").textContent = product.title;
+  if (product.oldPrice) {
+  $("#product-price").innerHTML = `
+    <span class="old-price">PKR ${product.oldPrice}</span>
+    <span class="new-price">PKR ${product.newPrice}</span>
+  `;
+} else {
+  $("#product-price").textContent = "PKR " + (product.newPrice || product.price);
+}
+
+  $("#availability").textContent = product.availability;
+const descriptionContainer = $("#product-description");
+descriptionContainer.innerHTML = ""; // clear old content
+
+// Long description takes priority if it exists
+if (product.longDescription) {
+  descriptionContainer.innerHTML = product.longDescription;
+} else {
+  if (product.description1) {
+    descriptionContainer.innerHTML += `<p>${product.description1}</p>`;
+  }
+  if (product.description2) {
+    descriptionContainer.innerHTML += `<p>${product.description2}</p>`;
+  }
+  if (!product.description1 && !product.description2 && product.description) {
+    descriptionContainer.innerHTML = `<p>${product.description}</p>`;
+  }
+}
+
+
+  const taglineEl = $("#product-tagline");
+  if (product.tagline?.trim()) {
+    taglineEl.textContent = product.tagline;
+    taglineEl.style.display = "block";
+  } else {
+    taglineEl.style.display = "none";
+  }
+
+  setField("product-material", product.material);
+  setField("product-contour", product.contour);
+  setField("product-dimensions", product.dimensions);
+  setField("product-texture", product.texture);
+// ====== ADD TO CART BUTTON ======
+$("#add-to-cart").addEventListener("click", () => {
+  const colorSelect = document.getElementById("detailColor");
+  const selectedColor = colorSelect ? colorSelect.value : "Default";
+
+  // ✅ Prefer newPrice if available
+  const price = product.newPrice || product.price;
+
+  // ✅ Send product image as well
+  addToCart(product.title, Number(price), productId, selectedColor, product.img);
+
+  showToast(`${product.title} (${selectedColor}) added to cart!`);
+});
+<!-- ADD TO CART BUTTON (FOR DIRECT CHECKOUT) -->
+$("#add-to-cart").addEventListener("click", () => {
+  const colorSelect = document.getElementById("detailColor");
+  const selectedColor = colorSelect ? colorSelect.value : "Default";
+
+  const price = product.newPrice || product.price;
+
+  addToCart(product.title, Number(price), productId, selectedColor, product.img);
+
+  showToast(`${product.title} (${selectedColor}) added to cart!`);
+}, { once: true }); // ✅ attaches only once
+
+// ====== RENDER COLOR OPTIONS ======
+const colorWrapper = document.getElementById("colorWrapper");
+const colorSelect = document.getElementById("detailColor");
+
+// Clear any old options
+colorSelect.innerHTML = "";
+
+if (product.colors && product.colors.length > 0) {
+  colorWrapper.style.display = "block";
+
+  product.colors.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;   // this is the visible label
+    colorSelect.appendChild(opt);
+  });
+} else {
+  colorWrapper.style.display = "none"; // hide if no colors
+}
+
+// ====== HANDLE CHECKOUT ======
+async function handleCheckout(method) {
+  const name = $("#custName").value.trim();
+  const phone = $("#custPhone").value.trim();
+  const email = $("#custEmail")?.value || "noemail@customer.com";
+  const address = $("#custAddress").value.trim();
+  const notes = $("#custNotes").value.trim();
+
+  if (!name || !phone || !address) {
+    alert("Please fill in Name, Phone, and Address.");
+    return;
+  }
+
+  const deliveryCharge = 300;
+  let subtotal = 0;
+  let orderText = "🛒 Floral Collection Order\n\n";
+
+  if (checkoutMode === "direct" && directProduct) {
+    subtotal = Number(directProduct.price) * directProduct.qty;
+    orderText += `${directProduct.name} (x${directProduct.qty}) - PKR ${directProduct.price * directProduct.qty}\n`;
+  } else {
+    cart.forEach(it => {
+      subtotal += it.price * it.qty;
+      orderText += `${it.name} (x${it.qty}) - PKR ${it.price * it.qty}\n`;
+    });
+  }
+
+  orderText += `\nDelivery Charges: PKR ${deliveryCharge}`;
+  orderText += `\nTotal: PKR ${subtotal + deliveryCharge}\n`;
+  orderText += `\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}\n`;
+  if (notes) orderText += `Notes: ${notes}\n`;
+
+  // === SEND ORDER ===
+  if (method === "email") {
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "c358eb90-07d6-49c6-b6c0-e20a0ce50f65",
+          subject: "New Order from Floral Collection",
+          from_name: name,
+          email: email,
+          message: orderText
+        })
+      });
+      const result = await response.json();
+      if (result.success) {
+        window.location.href = "orderconfirmation.html";
+      } else {
+        alert("❌ Failed: " + result.message);
+      }
+    } catch (e) {
+      alert("⚠️ Error sending order.");
+    }
+  }
+
+  if (method === "whatsapp") {
+    const waText = encodeURIComponent(orderText);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`, "_blank");
+  }
+
+  if (checkoutMode === "cart") {
+    cart = [];
+    saveCart();
+  }
+
+  closeCheckout();
+}
+
+// ====== OPEN CHECKOUT MODAL ON BUY NOW ======
+$("#direct-checkout").addEventListener("click", () => {
+  checkoutMode = "direct";
+  directProduct = {
+    name: product.title,
+    price: Number(product.price),
+    id: productId,
+    qty: 1
+  };
+  document.getElementById("checkoutOverlay").style.display = "flex"; // ✅ fixed ID
+});
+
+// ====== BUTTON LISTENERS ======
+$("#emailCheckoutBtn").addEventListener("click", () => handleCheckout("email"));
+$("#waCheckoutBtn").addEventListener("click", () => handleCheckout("whatsapp"));
+
+$("#cancelCheckoutBtn").addEventListener("click", closeCheckout);
+$("#closeModalBtn").addEventListener("click", closeCheckout);
+
+// ====== CLOSE MODAL FUNCTION ======
+function closeCheckout() {
+  document.getElementById("checkoutOverlay").style.display = "none"; // ✅ fixed ID
+}
+
+  setupImageModal();
+  renderRelatedProducts(productId);
+});
+
+function setField(id, value) {
+  const el = document.getElementById(id);
+  if (el && typeof value === "string" && value.trim()) {
+    el.textContent = value;
+    el.parentElement.style.display = "list-item";
+  } else {
+    el?.parentElement?.style && (el.parentElement.style.display = "none");
+  }
+}
+
+function setupImageModal() {
+  const productImg = document.getElementById("product-image");
+  const modalImg = document.getElementById("modalImg");
+  const imgModal = document.getElementById("imgModal");
+  const closeBtn = document.getElementById("closeImgModal");
+
+  if (!productImg || !modalImg || !imgModal || !closeBtn) return;
+
+  productImg.addEventListener("click", () => {
+    modalImg.src = productImg.src;
+    imgModal.style.display = "flex";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    imgModal.style.display = "none";
+  });
+
+  imgModal.addEventListener("click", (e) => {
+    if (e.target === imgModal) imgModal.style.display = "none";
+  });
+}
+
+function renderRelatedProducts(currentId) {
+  const relatedWrapper = document.querySelector(".related-wrapper");
+  if (!relatedWrapper) return;
+
+  relatedWrapper.innerHTML = "";
+
+  const productKeys = Object.keys(products).filter(id => id !== currentId);
+  const shuffled = productKeys.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+  shuffled.forEach(id => {
+    const p = products[id];
+    const card = document.createElement("div");
+    card.className = "related-card";
+    card.style = "width:200px;margin:10px;text-align:center;cursor:pointer";
+
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.title}" style="width:100%;border-radius:8px">
+      <h4>${p.title}</h4>
+      <p>PKR ${p.price}</p>
+    `;
+
+    card.addEventListener("click", () => {
+      window.location.href = "details.html?id=" + id;
+    });
+
+    relatedWrapper.appendChild(card);
+  });
+}
+</script>
+
+
+</body>
+</html>

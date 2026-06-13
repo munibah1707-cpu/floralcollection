@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jersey Hijabs - Floral Collection</title>
+  <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+<header>
+   <div class="header">
+    <div class="header-left">
+      <span class="menu-icon" onclick="toggleMenu()">☰</span>
+     <div class="header-center">
+        <img src="https://i.ibb.co/dwkcTHT3/Whats-App-Image-2025-07-30-at-15-01-33-249b3325-removebg-preview.png"
+          alt="Floral Logo" class="logo" />
+        <h1><i>Floral Collection</i></h1>
+    </div>
+  </div> <div class="header-right">
+    <div class="header-icons">
+      <a href="registration.html" title="Register">
+        <i class="fas fa-user-plus"></i>
+      </a>
+      <div class="search-container">
+        <span class="search-icon" onclick="toggleSearch()">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search..." />
+      </div>
+    </div>
+  </div>
+<!-- Cart Icon -->
+<div id="cartIcon">🛒  (<span id="cartCount">0</span>)</div>
+
+<!-- Cart Drawer -->
+<div id="cartDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <strong>Your Cart</strong>
+    <div style="display:flex;gap:8px;align-items:center;margin-top: 10px">
+      <button id="clearCartBtn" class="btn link">Clear</button>
+      <button id="closeCartBtn" class="btn link" aria-label="Close">✕</button>
+    </div>
+  </div>
+  <div id="cartItems" class="drawer-body"></div>
+  <div class="drawer-foot">
+    <div id="cartSummary">
+  <div class="summary-row">
+    <span>Subtotal:</span>
+    <span id="cartSubtotal">PKR 0</span>
+  </div>
+  <div class="summary-row">
+    <span>Delivery:</span>
+    <span id="cartDelivery">PKR 300</span>
+  </div>
+  <div class="summary-row total-row">
+    <strong>Total:</strong>
+    <strong id="cartTotal">PKR 0</strong>
+  </div>
+</div>
+
+    <div style="display:flex;gap:8px">
+      <button id="openCheckoutForm" class="btn primary" style="flex:1">Checkout</button>
+      <button id="continueShoppingBtn" class="btn" style="flex:1">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div id="checkoutOverlay">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>Checkout</h3>
+      <button id="closeModalBtn" class="btn link">✕</button>
+    </div>
+    <p style="margin-top:0">Please enter customer details. Choose Email or WhatsApp to send the order.</p>
+    <input id="custName" placeholder="Full name" />
+    <input id="custPhone" placeholder="Phone number" />
+    <textarea id="custAddress" placeholder="Address"></textarea>
+    <textarea id="custNotes" placeholder="Notes (optional)"></textarea>
+    <div class="modal-actions">
+      <button id="emailCheckoutBtn" class="btn primary">Checkout via Email</button>
+      <button id="waCheckoutBtn" class="btn">Checkout via WhatsApp</button>
+      <button id="cancelCheckoutBtn" class="btn link">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"><span class="toast-message"></span></div>
+
+      </div>
+      </div>
+    </header>
+    <!-- Navigation -->
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="floral.html">Home</a></li>
+        <li><a href="#about-section">About</a></li>
+        <li>  <a href="mailto:floralcollection001@gmail.com" onclick="toggleMenu()"title="Email us your query">
+    📧 Contact </a></li>
+        <li class="dropdown">
+          <a href="#">Collection ▼</a>
+          <ul class="dropdown-menu">
+          <li><a href="chiffon category.html">Chiffon Hijabs</a></li>
+<li><a href="silk.html">Silk Hijabs</a></li>
+<li><a href="jersey.html">Jersey Hijabs</a></li>
+<li><a href="glitter.html">Glitter Georgette Hijabs</a></li>
+<li><a href="viscose.html">Viscose Hijabs</a></li>
+<li><a href="deals.html">Hijab Deals</a></li>
+<li><a href="Accessories.html">Hijab Accessories</a></li>
+
+          </ul>
+        </li>
+      </ul>
+    </nav>
+<!-- Slide Menu -->
+<div id="mobileMenu" class="mobile-menu">
+  <button class="close-btn" onclick="toggleMenu()">×</button>
+  <ul>
+    <li><a href="index.html">🏠Home</a></li>
+    <li><a href="#about-section">🧣About</a></li>
+   <li><a href="chiffon category.html">Chiffon Hijabs</a></li>
+<li><a href="silk.html">Silk Hijabs</a></li>
+<li><a href="jersey.html">Jersey Hijabs</a></li>
+<li><a href="glitter.html">Glitter Georgette Hijabs</a></li>
+<li><a href="viscose.html">Viscose Hijabs</a></li>
+<li><a href="deals.html">Hijab Deals</a></li>
+<li><a href="accessories.html">Hijab Accessories</a></li>
+
+    <li><a href="#" onclick="openContact()" title="Email us your query">📧 Contact</a>
+</li>
+  </ul>
+</div>
+<h1 style="font-style: italic;color: #4d4a4a;text-align: center;margin-top: 100px;">Premium Jersey Hijabs</h1>
+ <section id="all-chiffon">
+  <section id="jersey-section" style="padding: 50px 0;">
+  <div class="shop-now-container">
+    <div class="products-wrapper">
+     <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=GoldenHoney">
+            <img src="https://i.ibb.co/PZq74Xyh/Whats-App-Image-2025-08-23-at-03-38-41-9c7e646b.jpg" alt="Golden Honey Jersey">
+          </a>
+          <h3>Golden Honey Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Golden Honey Jersey" data-price="700" data-id="GoldenHoney">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Purewhite">
+            <img src="https://i.ibb.co/d4gsFW43/Whats-App-Image-2025-08-22-at-15-07-58-8c86c41b.jpg" alt="Pure White Jersey">
+          </a>
+          <h3>Pure White Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Pure White Jersey" data-price="700" data-id="Purewhite">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Chocolatebrown">
+            <img src="https://i.ibb.co/m5zh0KxJ/Whats-App-Image-2025-08-22-at-15-07-59-e7ace367.jpg" alt="Chocolate Brown Jersey">
+          </a>
+          <h3>Chocolate Brown Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Chocolate Brown Jersey" data-price="700" data-id="Chocolatebrown">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=crimsonRed">
+            <img src="https://i.ibb.co/rKF1Rd2z/Whats-App-Image-2025-08-22-at-15-07-59-a92f5da5.jpg" alt="Crimson Red Jersey">
+          </a>
+          <h3>Crimson Red Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Crimson Red Jersey" data-price="700" data-id="crimsonRed">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=BerryWine">
+            <img src="https://i.ibb.co/zWMPyhZL/Whats-App-Image-2025-08-22-at-15-07-59-971bedf0.jpg" alt="Berry Wine Jersey">
+          </a>
+          <h3>Berry Wine Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Berry Wine Jersey" data-price="700" data-id="BerryWine">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Green">
+            <img src="https://i.ibb.co/yB8LZCkP/Whats-App-Image-2025-08-22-at-15-08-00-cdc7d6d2.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Olive Green Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Olive Green Jersey" data-price="700" data-id="Green">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=RoyalPurple">
+            <img src="https://i.ibb.co/1GrHVwm8/Whats-App-Image-2025-08-22-at-15-08-00-414f55be.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Royal Purple Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Royal Purple Jersey" data-price="700" data-id="RoyalPurple">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=TangerineOrange">
+            <img src="https://i.ibb.co/mrf96HwP/Whats-App-Image-2025-08-22-at-15-08-01-c477ca59.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Tangerine Orange Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Tangerine Orange Jersey" data-price="700" data-id="TangerineOrange">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=SapphireBlue">
+            <img src="https://i.ibb.co/kYxRQRH/Whats-App-Image-2025-08-22-at-15-08-01-cc908179.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Sapphire Blue Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Sapphire Blue Jersey" data-price="700" data-id="SapphireBlue">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Forest">
+            <img src="https://i.ibb.co/pV8qVnS/Whats-App-Image-2025-08-22-at-15-08-01-7c42b20f.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Deep Forest Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Deep Forest Jersey" data-price="700" data-id="Forest">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=PlumMaroon">
+            <img src="https://i.ibb.co/C5RkBRjN/Whats-App-Image-2025-08-22-at-15-08-02-4774b573.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Plum Maroon Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Plum Maroon Jersey" data-price="700" data-id="PlumMaroon">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=dustyLavender">
+            <img src="https://i.ibb.co/CsXw9MgC/Whats-App-Image-2025-08-22-at-15-08-02-c3fe083d.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Dusty Lavender Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Dusty Lavender Jersey" data-price="700" data-id="dustyLavender">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=tealGreen">
+            <img src="https://i.ibb.co/Zp8tfq20/Whats-App-Image-2025-08-22-at-15-08-03-23b6530c.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Teal Green Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Teal Green Jersey" data-price="700" data-id="tealGreen">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Mist">
+            <img src="https://i.ibb.co/wZ4NCtVg/Whats-App-Image-2025-08-22-at-15-08-03-747336a8.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Silver Mist Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Silver Mist Jersey" data-price="700" data-id="Mist">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Blush">
+            <img src="https://i.ibb.co/xtdXn70m/Whats-App-Image-2025-08-22-at-15-08-05-b0757b09.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Blush Pink Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Blush Pink Jersey" data-price="700" data-id="Blush">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Olivetaupe">
+            <img src="https://i.ibb.co/8LMsM4rM/Whats-App-Image-2025-08-22-at-15-08-04-92799316.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Olive Taupe Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Olive Taupe Jersey" data-price="700" data-id="Olivetaupe">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=warmTaupe">
+            <img src="https://i.ibb.co/tp7XNyTb/Whats-App-Image-2025-08-22-at-15-08-04-bc32de78.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Warm Taupe Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Warm Taupe Jersey" data-price="700" data-id="warmTaupe">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Mocha">
+            <img src="https://i.ibb.co/SD1Jsvpq/Whats-App-Image-2025-08-22-at-15-08-04-0794223d.jpg" alt="Jersey Hijab">
+          </a>
+          <h3> Mocha Brown Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Mocha Brown Jersey" data-price="700" data-id="Mocha">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Rosewood">
+            <img src="https://i.ibb.co/ym4SktmY/Whats-App-Image-2025-08-22-at-15-08-05-e0b2413c.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Rosewood Pink Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Rosewood Pink Jersey" data-price="700" data-id="Rosewood">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=MidnightNavyblue">
+            <img src="https://i.ibb.co/7ds9Xq9R/Whats-App-Image-2025-08-22-at-15-08-05-ba01cbaa.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Midnight Navy Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Midnight Navy Jersey" data-price="700" data-id="MidnightNavyblue">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Deepb">
+            <img src="https://i.ibb.co/HfbW2Xvy/Whats-App-Image-2025-08-22-at-15-08-05-ef4de2a3.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Deep Burgundy Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Deep Burgundy Jersey" data-price="700" data-id="Deepb">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Charcoalgrey">
+            <img src="https://i.ibb.co/TqrZj3cH/Whats-App-Image-2025-08-22-at-15-08-06-68b91424.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Charcoal Grey Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Charcoal Grey Jersey" data-price="700" data-id="Charcoalgrey">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Cocoa">
+            <img src="https://i.ibb.co/HT4gC2QR/Whats-App-Image-2025-08-22-at-15-08-06-7dbc7738.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Cocoa Brown Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Cocoa Brown Jersey" data-price="700" data-id="Cocoa">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=JetBlack">
+            <img src="https://i.ibb.co/1GJT5N1s/Whats-App-Image-2025-08-22-at-15-08-08-2be9249d.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Jet Black Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Jet Black Jersey" data-price="700" data-id="JetBlack">Add to Cart</button>
+        </div>
+      </div> 
+       <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=sandstoneBeige">
+            <img src="https://i.ibb.co/C3RThK6m/Whats-App-Image-2025-08-22-at-15-08-08-a77606d5.jpg" alt="Jersey Hijab">
+          </a>
+          <h3>Sandstone Beige Jersey</h3>
+          <p class="price">PKR 700</p>
+          <button class="add-to-cart" data-name="Sandstone Beige Jersey" data-price="700" data-id="sandstoneBeige">Add to Cart</button>
+        </div>
+      </div> 
+    
+  </div>
+</section>  
+ </section>
+
+<a href="index.html" class="back-btn">⬅ Back to Home</a>
+ <div id="policy-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#be7a7a; border:1px solid #cfa0a0; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('policy-popup').style.display='none'">✕</button>
+    <h2>Privacy Policy</h2>
+    <p> At Floral Collection, we value your privacy and are committed to protecting your personal information. Any data
+      you share with us — such as your name, email address, or order details — is used solely to provide a better
+      shopping experience and process your orders. We do not sell, rent, or share your information with third parties
+      for marketing purposes. Your trust means everything to us, and we take appropriate security measures to keep your
+      data safe. By using our website, you agree to the terms outlined in this policy.</p>
+  </div>
+  <!-- Terms & Conditions Popup -->
+  <div id="terms-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#c99696; border:1px solid #ddaeae; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('terms-popup').style.display='none'" style="float:right;">✕</button>
+    <h2>Terms of Service</h2>
+    <p>
+      By using the Floral Collection website, you agree to the following terms and conditions. All products listed are
+      subject to availability and may be withdrawn at any time. Prices are subject to change without prior notice. When
+      placing an order, please ensure your information is accurate. We reserve the right to refuse or cancel any order
+      at our discretion. All content on this website, including images and text, is the property of Floral Collection
+      and may not be used without permission. Use of our site signifies your agreement to comply with these terms.
+    </p>
+  </div>
+
+  <!-- Return & Exchange Policy Popup -->
+  <div id="return-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('return-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Return & Exchange Policy</h2>
+    <p>
+      We offer a 7-day return policy from the date you receive your order. Items must be unworn, unused, with tags, and
+      in original packaging along with proof of purchase. Refunds are only issued for defective or incorrect items. For
+      other concerns like change of mind, only exchanges are allowed. The customer is responsible for sending the item
+      back to our office and covering delivery charges. Exchanges will be processed after inspection.
+    </p>
+    <p>
+      Items on sale are non-refundable and non-exchangeable, unless found defective. Items sent without prior approval
+      will not be accepted.
+    </p>
+    <p>
+      Damaged or incorrect items must be reported immediately upon receiving the package. We do not accept returns for
+      personalized items, perishable goods, personal care products, or hazardous materials. Gift cards and sale items
+      are also non-returnable.
+    </p>
+    <p>
+      Refunds (if approved) will be credited to your original payment method after inspection. Processing time may vary
+      depending on your bank or credit card provider.
+    </p>
+  </div>
+  <div id="our-story-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('our-story-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Our Story</h2>
+    <p>At Floral Collection, our journey began with a simple idea — to celebrate elegance and individuality through
+      timeless fashion. Inspired by nature’s grace and the vibrant charm of floral beauty, we set out to create a brand
+      that blends classic aesthetics with modern sophistication. Each piece in our collection is thoughtfully designed
+      to reflect confidence, comfort, and creativity. What started as a small passion project has grown into a community
+      that values quality, detail, and self-expression. We’re here to help you look good and feel even better — because
+      your style tells your story.
+
+    </p>
+  </div>
+  <div id="contact-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('contact-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Contact Us</h2>
+    <p>We'd love to hear from you! For any questions, collaborations, or feedback, feel free to reach out. The easiest
+      way to contact us is through our gamil<a href="mailto:floralcollection001@gmail.com"style="color: #b36161; text-decoration: underline;">just send us a direct message</a> and we’ll
+      get back to you as soon as possible.</p>
+
+  </div>
+  <div id="blog-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#fff7f7; border:1px solid #e3caca; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('blog-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Floral Blog</h2>
+
+    <div class="blog-post">
+      <h3>🌸 3 Ways to Style Floral Prints This Summer</h3>
+      <p>Floral prints are a timeless classic. Learn how to pair them with neutrals, layer them for cooler evenings, or
+        style them for casual and formal events.</p>
+    </div>
+
+    <div class="blog-post">
+      <h3>👗 Behind the Scenes: Our Design Journey</h3>
+      <p>From sketch to stitch, we pour love into every piece. Discover how your favorite floral dresses are created!
+      </p>
+    </div>
+
+    <div class="blog-post">
+      <h3>💬 Customer Style Moments</h3>
+      <p>See how our beautiful customers style their Floral Collection outfits — and get featured on our page!</p>
+    </div>
+  </div>
+
+  <footer class="site-footer" id="about-section">
+    <div class="footer-top">
+      <div class="footer-newsletter">
+        <h4>Sign up and save</h4>
+        <p>Get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+        <form>
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <div class="link-group">
+        <h5>Collections</h5>
+        <ul>
+          <li><a href="#">Chiffon Hijabs</a></li>
+          <li><a href="#">Silk Hijabs</a></li>
+          <li><a href="#">Glitter Georgette Hijabs</a></li>
+          <li><a href="#">Jersey Hijabs</a></li>
+          <li><a href="#">Hijab Deals</a></li>
+        </ul>
+      </div>
+      <div class="link-group">
+        <h5>About</h5>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('our-story-popup').style.display='block'">Our Story</a></li>
+          <li><a href="#" onclick="document.getElementById('contact-popup').style.display='block'">Contact Us</a></li>
+          <li><a href="#" onclick="document.getElementById('blog-popup').style.display='block'">Blog</a></li>
+
+        </ul>
+      </div>
+      <div class="link-group">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('terms-popup').style.display='block'">Terms of Service</a>
+          </li>
+          <li><a href="#" onclick="document.getElementById('policy-popup').style.display='block'">Privacy Policy</a>
+          </li>
+          <li><a href="#" onclick="document.getElementById('return-popup').style.display='block'">Return Policy</a></li>
+
+        </ul>
+      </div>
+      <div class="social-group">
+        <h5>Follow Us</h5>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/floralcollection_01/" target="_blank" aria-label="Instagram">
+            <img src="icon-instagram.svg" alt="Instagram">
+            <a href="https://www.instagram.com/floralcollection_01/" target="_blank" aria-label="Instagram"><img
+                src="icon-facebook.svg" alt="Facebook"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Floral Collection. All rights reserved.</p>
+    </div>
+  </footer>
+<script src="cart.js"></script>
+ <script src="styles.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff0f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #d6336c;
+    }
+    .order-items {
+      margin: 20px 0;
+      padding: 10px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+    .order-items p {
+      margin: 8px 0;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 18px;
+      text-align: right;
+      margin-top: 15px;
+    }
+    .btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #d6336c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✅ Thank You for Your Order!</h1>
+    <p>Your order has been placed successfully.</p>
+    
+    <div id="orderDetails"></div>
+    
+    <a href="index.html" class="btn">Continue Shopping</a>
+  </div>
+
+  <script>
+    const order = JSON.parse(localStorage.getItem("lastOrder"));
+    const container = document.getElementById("orderDetails");
+
+    if (order) {
+      container.innerHTML = `
+        <h2>Order Summary</h2>
+        <p><strong>Name:</strong> ${order.name}</p>
+        <p><strong>Phone:</strong> ${order.phone}</p>
+        <p><strong>Email:</strong> ${order.email}</p>
+        <p><strong>Address:</strong> ${order.address}</p>
+        <p><strong>Notes:</strong> ${order.notes || "—"}</p>
+
+        <div class="order-items">
+          <h3>Items</h3>
+          ${order.items.map(i => `<p>${i}</p>`).join("")}
+        </div>
+
+        <p><strong>Subtotal:</strong> Rs.${order.subtotal}</p>
+        <p><strong>Delivery:</strong> Rs.${order.delivery}</p>
+        <p class="total">Total: Rs.${order.total}</p>
+      `;
+      localStorage.removeItem("lastOrder"); // clear after showing
+    } else {
+      container.innerHTML = "<p>No order found.</p>";
+    }
+  </script>
+</body>
+</html>

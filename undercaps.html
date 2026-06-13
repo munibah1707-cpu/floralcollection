@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chiffon Hijabs - Floral Collection</title>
+  <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+<header>
+   <div class="header">
+    <div class="header-left">
+      <span class="menu-icon" onclick="toggleMenu()">☰</span>
+     <div class="header-center">
+        <img src="https://i.ibb.co/dwkcTHT3/Whats-App-Image-2025-07-30-at-15-01-33-249b3325-removebg-preview.png"
+          alt="Floral Logo" class="logo" />
+        <h1><i>Floral Collection</i></h1>
+    </div>
+  </div> <div class="header-right">
+    <div class="header-icons">
+      <a href="registration.html" title="Register">
+        <i class="fas fa-user-plus"></i>
+      </a>
+      <div class="search-container">
+        <span class="search-icon" onclick="toggleSearch()">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search..." />
+      </div>
+    </div>
+  </div>
+<!-- Cart Icon -->
+<div id="cartIcon">🛒  (<span id="cartCount">0</span>)</div>
+
+<!-- Cart Drawer -->
+<div id="cartDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <strong>Your Cart</strong>
+    <div style="display:flex;gap:8px;align-items:center;margin-top: 10px">
+      <button id="clearCartBtn" class="btn link">Clear</button>
+      <button id="closeCartBtn" class="btn link" aria-label="Close">✕</button>
+    </div>
+  </div>
+  <div id="cartItems" class="drawer-body"></div>
+  <div class="drawer-foot">
+    <div id="cartSummary">
+  <div class="summary-row">
+    <span>Subtotal:</span>
+    <span id="cartSubtotal">PKR 0</span>
+  </div>
+  <div class="summary-row">
+    <span>Delivery:</span>
+    <span id="cartDelivery">PKR 300</span>
+  </div>
+  <div class="summary-row total-row">
+    <strong>Total:</strong>
+    <strong id="cartTotal">PKR 0</strong>
+  </div>
+</div>
+
+    <div style="display:flex;gap:8px">
+      <button id="openCheckoutForm" class="btn primary" style="flex:1">Checkout</button>
+      <button id="continueShoppingBtn" class="btn" style="flex:1">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div id="checkoutOverlay">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>Checkout</h3>
+      <button id="closeModalBtn" class="btn link">✕</button>
+    </div>
+    <p style="margin-top:0">Please enter customer details. Choose Email or WhatsApp to send the order.</p>
+    <input id="custName" placeholder="Full name" />
+    <input id="custPhone" placeholder="Phone number" />
+    <textarea id="custAddress" placeholder="Address"></textarea>
+    <textarea id="custNotes" placeholder="Notes (optional)"></textarea>
+    <div class="modal-actions">
+      <button id="emailCheckoutBtn" class="btn primary">Checkout via Email</button>
+      <button id="waCheckoutBtn" class="btn">Checkout via WhatsApp</button>
+      <button id="cancelCheckoutBtn" class="btn link">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"><span class="toast-message"></span></div>
+
+      </div>
+      </div>
+    </header>
+
+      <!-- Navigation -->
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="floral.html">Home</a></li>
+        <li><a href="#about-section">About</a></li>
+        <li>  <a href="mailto:floralcollection001@gmail.com" onclick="toggleMenu()"title="Email us your query">
+    📧 Contact </a></li>
+        <li class="dropdown">
+          <a href="#">Collection ▼</a>
+          <ul class="dropdown-menu">
+          <li><a href="chiffon category.html">Chiffon Hijabs</a></li>
+<li><a href="silk.html">Silk Hijabs</a></li>
+<li><a href="jersey.html">Jersey Hijabs</a></li>
+<li><a href="glitter.html">Glitter Georgette Hijabs</a></li>
+<li><a href="viscose.html">Viscose Hijabs</a></li>
+<li><a href="deals.html">Hijab Deals</a></li>
+<li><a href="Accessories.html">Hijab Accessories</a></li>
+
+          </ul>
+        </li>
+      </ul>
+    </nav>
+<!-- Slide Menu -->
+<div id="mobileMenu" class="mobile-menu">
+  <button class="close-btn" onclick="toggleMenu()">×</button>
+  <ul>
+    <li><a href="index.html">🏠Home</a></li>
+    <li><a href="#about-section">🧣About</a></li>
+   <li><a href="chiffon category.html">Chiffon Hijabs</a></li>
+<li><a href="silk.html">Silk Hijabs</a></li>
+<li><a href="jersey.html">Jersey Hijabs</a></li>
+<li><a href="glitter.html">Glitter Georgette Hijabs</a></li>
+<li><a href="viscose.html">Viscose Hijabs</a></li>
+<li><a href="deals.html">Hijab Deals</a></li>
+<li><a href="accessories.html">Hijab Accessories</a></li>
+
+    <li><a href="#" onclick="openContact()" title="Email us your query">📧 Contact</a>
+</li>
+  </ul>
+</div>
+<h1 style="font-style: italic;color: #4d4a4a;text-align: center;margin-top: 100px;">Chiffon Hijabs with caps</h1>
+
+  <section id="all-chiffon">
+    <section id="Accessories-section" style="padding: 50px 0;">
+  <div class="shop-now-container">
+    <div class="products-wrapper">
+     <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=A">
+            <img src="https://i.ibb.co/M03D1Yp/Whats-App-Image-2025-08-23-at-23-57-50-e42c200b.jpg" alt="Mauve with Dusty Pink">
+          </a>
+          <h3>Mauve with Dusty Pink</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Mauve with Dusty Pink" data-price="750" data-id="A">Add to Cart</button>
+        </div>
+      </div> 
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=B">
+            <img src="https://i.ibb.co/3mZJz05S/Whats-App-Image-2025-08-23-at-23-57-51-2b1c5f21.jpg" alt="Deep Navy With Dusty Navy">
+          </a>
+          <h3>Deep Navy With Dusty Navy</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Deep Navy With Dusty Navy" data-price="750" data-id="B">Add to Cart</button>
+        </div>
+      </div> 
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=C">
+            <img src="https://i.ibb.co/B5dzm2dm/Whats-App-Image-2025-08-23-at-23-57-50-4951b571.jpg" alt="Charcoal Black with Black">
+          </a>
+          <h3>Charcoal Black with Black</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Charcoal Black with Black" data-price="750" data-id="C">Add to Cart</button>
+        </div>
+      </div> 
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=D">
+            <img src="https://i.ibb.co/LD20jr9V/Whats-App-Image-2025-08-23-at-23-57-51-9efd1521.jpg" alt="Slate Grey With Light Grey">
+          </a>
+          <h3>Slate Grey With Light Grey</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Slate Grey With Light Grey" data-price="750" data-id="D">Add to Cart</button>
+        </div>
+      </div> 
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=E">
+            <img src="https://i.ibb.co/KcfKcdtD/Whats-App-Image-2025-08-23-at-23-57-51-3e045e14.jpg"  alt="Mocha Brown With Dusty Beige">
+          </a>
+          <h3>Mocha Brown With Dusty Beige</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Mocha Brown With Dusty Beige" data-price="750" data-id="E">Add to Cart</button>
+        </div>
+      </div> 
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=F">
+            <img src="https://i.ibb.co/MDLj6zJY/Whats-App-Image-2025-08-23-at-23-57-51-11ff9e34.jpg" alt="Chocolate Brown With Coffee Brown">
+          </a>
+          <h3>Chocolate Brown With Coffee Brown</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Chocolate Brown With Coffee Brown" data-price="750" data-id="F">Add to Cart</button>
+        </div>
+      </div> 
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=G">
+            <img src="https://i.ibb.co/yFSjk8pt/Whats-App-Image-2025-08-23-at-23-57-52-0f35d4ee.jpg" alt="Charcoal Grey With Dusty Mauve">
+          </a>
+          <h3>Charcoal Grey With Dusty Mauve</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Charcoal Grey With Dusty Mauve" data-price="750" data-id="G">Add to Cart</button>
+        </div>
+      </div>
+       
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=H">
+            <img src="https://i.ibb.co/G4t82SRc/Whats-App-Image-2025-08-23-at-23-57-52-341f022a.jpg" alt="Taupe Beige With Camel Beige">
+          </a>
+          <h3>Taupe Beige With Camel Beige</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Taupe Beige With Camel Beige" data-price="750" data-id="H">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=I">
+            <img src="https://i.ibb.co/b5zYxdsx/Whats-App-Image-2025-08-23-at-23-57-53-f21cc132.jpg" alt="Deep Forest With Dark Emerald Green">
+          </a>
+          <h3>Deep Forest With Dark Emerald Green</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Deep Forest With Dark Emerald Green" data-price="750" data-id="I">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=J">
+            <img src="https://i.ibb.co/zhrMwCQB/Whats-App-Image-2025-08-23-at-23-57-53-fa766188.jpg" alt="White With Pure White">
+          </a>
+          <h3>White With Pure White</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="White With Pure White" data-price="750" data-id="J">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=K">
+            <img src="https://i.ibb.co/p6Pk9wBB/Whats-App-Image-2025-08-23-at-23-57-53-9af67f00.jpg" alt="Sky Blue With Powder Blue">
+          </a>
+          <h3>Sky Blue With Powder Blue</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Sky Blue With Powder Blue" data-price="750" data-id="K">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=L">
+            <img src="https://i.ibb.co/mFdmGsW0/Whats-App-Image-2025-08-23-at-23-57-54-b2888690.jpg" alt="Terracotta With Stone Brown">
+          </a>
+          <h3>Terracotta With Stone Brown</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Terracotta With Stone Brown" data-price="750" data-id="L">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=M">
+            <img src="https://i.ibb.co/Nb6DZgD/Whats-App-Image-2025-08-23-at-23-57-54-59a197b5.jpg" alt="SeaFoam Green With Dusty Teal">
+          </a>
+          <h3>SeaFoam Green With Dusty Teal</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="SeaFoam Green With Dusty Teal" data-price="750" data-id="M">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=N">
+            <img src="https://i.ibb.co/d4yJtmCB/Whats-App-Image-2025-08-23-at-23-57-55-44c1861b.jpg" alt="SkyBlue With Snow White">
+          </a>
+          <h3>SkyBlue With Snow White</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="SkyBlue With Snow White" data-price="750" data-id="N">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=O">
+            <img src="https://i.ibb.co/dwWpTXzc/Whats-App-Image-2025-08-23-at-23-57-55-a4653775.jpg" alt="Light Peach Combo">
+          </a>
+          <h3>Light Peach Combo</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Light Peach Combo" data-price="750" data-id="O">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=P">
+            <img src="https://i.ibb.co/qM8d6CBn/Whats-App-Image-2025-08-23-at-23-57-55-200e8208.jpg" alt="Crimson Combo">
+          </a>
+          <h3>Crimson Combo</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Crimson Combo" data-price="750" data-id="P">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=Q">
+            <img src="https://i.ibb.co/Nng6bmv2/Whats-App-Image-2025-08-23-at-23-57-56-7997c4e7.jpg" alt="MidNight Violet Combo">
+          </a>
+          <h3>MidNight Violet Combo</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="MidNight Violet Combo" data-price="750" data-id="Q">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=R">
+            <img src="https://i.ibb.co/0RdzfxPH/Whats-App-Image-2025-08-23-at-23-57-56-187c3668.jpg"  alt="Light Beige Combo">
+          </a>
+          <h3>Light Beige Combo</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Light Beige Combo" data-price="750" data-id="R">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=S">
+            <img src="https://i.ibb.co/pvkjJhC0/Whats-App-Image-2025-08-23-at-23-57-57-9c5aefbf.jpg"  alt="Dark Olive With Dusty Olive">
+          </a>
+          <h3>Dark Olive With Dusty Olive</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Dark Olive With Dusty Olive" data-price="750" data-id="S">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=T">
+            <img src="https://i.ibb.co/G4WXCKnY/Whats-App-Image-2025-08-23-at-23-57-57-c11c88e6.jpg" alt="Mauve With Lavender Mist">
+          </a>
+          <h3>Mauve With Lavender Mist</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Mauve With Lavender Mist" data-price="750" data-id="T">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=U">
+            <img src="https://i.ibb.co/Pv6yM4mH/Whats-App-Image-2025-08-23-at-23-57-57-9d5516a9.jpg" alt="Lavender Combo">
+          </a>
+          <h3>Lavender Combo</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Lavender Combo" data-price="750" data-id="U">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=V">
+            <img src="https://i.ibb.co/50fM83T/Whats-App-Image-2025-08-23-at-23-57-58-600572a9.jpg" alt="Warm Taupe Combo">
+          </a>
+          <h3>Warm Taupe Combo</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Warm Taupe Combo" data-price="750" data-id="V">Add to Cart</button>
+        </div>
+      </div>
+      <div class="category">
+        <div class="product-card">
+          <a href="details.html?id=W">
+            <img src="https://i.ibb.co/twgbmyxY/Whats-App-Image-2025-08-23-at-23-57-58-7a09a31f.jpg" alt="Mauve With Beige Combo">
+          </a>
+          <h3>Mauve With Beige Combo</h3>
+          <p class="price">PKR 750.00</p>
+          <button class="add-to-cart" data-name="Mauve With Beige Combo" data-price="750" data-id="W">Add to Cart</button>
+        </div>
+      </div>
+
+  </div>
+</section>
+      </section>
+<a href="index.html" class="back-btn">⬅ Back to Home</a>
+ <div id="policy-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#be7a7a; border:1px solid #cfa0a0; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('policy-popup').style.display='none'">✕</button>
+    <h2>Privacy Policy</h2>
+    <p> At Floral Collection, we value your privacy and are committed to protecting your personal information. Any data
+      you share with us — such as your name, email address, or order details — is used solely to provide a better
+      shopping experience and process your orders. We do not sell, rent, or share your information with third parties
+      for marketing purposes. Your trust means everything to us, and we take appropriate security measures to keep your
+      data safe. By using our website, you agree to the terms outlined in this policy.</p>
+  </div>
+  <!-- Terms & Conditions Popup -->
+  <div id="terms-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#c99696; border:1px solid #ddaeae; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('terms-popup').style.display='none'" style="float:right;">✕</button>
+    <h2>Terms of Service</h2>
+    <p>
+      By using the Floral Collection website, you agree to the following terms and conditions. All products listed are
+      subject to availability and may be withdrawn at any time. Prices are subject to change without prior notice. When
+      placing an order, please ensure your information is accurate. We reserve the right to refuse or cancel any order
+      at our discretion. All content on this website, including images and text, is the property of Floral Collection
+      and may not be used without permission. Use of our site signifies your agreement to comply with these terms.
+    </p>
+  </div>
+
+  <!-- Return & Exchange Policy Popup -->
+  <div id="return-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('return-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Return & Exchange Policy</h2>
+    <p>
+      We offer a 7-day return policy from the date you receive your order. Items must be unworn, unused, with tags, and
+      in original packaging along with proof of purchase. Refunds are only issued for defective or incorrect items. For
+      other concerns like change of mind, only exchanges are allowed. The customer is responsible for sending the item
+      back to our office and covering delivery charges. Exchanges will be processed after inspection.
+    </p>
+    <p>
+      Items on sale are non-refundable and non-exchangeable, unless found defective. Items sent without prior approval
+      will not be accepted.
+    </p>
+    <p>
+      Damaged or incorrect items must be reported immediately upon receiving the package. We do not accept returns for
+      personalized items, perishable goods, personal care products, or hazardous materials. Gift cards and sale items
+      are also non-returnable.
+    </p>
+    <p>
+      Refunds (if approved) will be credited to your original payment method after inspection. Processing time may vary
+      depending on your bank or credit card provider.
+    </p>
+  </div>
+  <div id="our-story-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('our-story-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Our Story</h2>
+    <p>At Floral Collection, our journey began with a simple idea — to celebrate elegance and individuality through
+      timeless fashion. Inspired by nature’s grace and the vibrant charm of floral beauty, we set out to create a brand
+      that blends classic aesthetics with modern sophistication. Each piece in our collection is thoughtfully designed
+      to reflect confidence, comfort, and creativity. What started as a small passion project has grown into a community
+      that values quality, detail, and self-expression. We’re here to help you look good and feel even better — because
+      your style tells your story.
+
+    </p>
+  </div>
+  <div id="contact-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#bb9090; border:1px solid #c08888; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('contact-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Contact Us</h2>
+    <p>We'd love to hear from you! For any questions, collaborations, or feedback, feel free to reach out. The easiest
+      way to contact us is through our gamil<a href="mailto:floralcollection001@gmail.com"style="color: #b36161; text-decoration: underline;">just send us a direct message</a> and we’ll
+      get back to you as soon as possible.</p>
+
+  </div>
+  <div id="blog-popup"
+    style="display:none; position:fixed; top:10%; left:10%; width:80%; background:#fff7f7; border:1px solid #e3caca; padding:20px; z-index:1000;">
+    <button onclick="document.getElementById('blog-popup').style.display='none'"
+      style="float:right; background-color: transparent; border: none; font-size: 16px; cursor: pointer;">✕</button>
+    <h2>Floral Blog</h2>
+
+    <div class="blog-post">
+      <h3>🌸 3 Ways to Style Floral Prints This Summer</h3>
+      <p>Floral prints are a timeless classic. Learn how to pair them with neutrals, layer them for cooler evenings, or
+        style them for casual and formal events.</p>
+    </div>
+
+    <div class="blog-post">
+      <h3>👗 Behind the Scenes: Our Design Journey</h3>
+      <p>From sketch to stitch, we pour love into every piece. Discover how your favorite floral dresses are created!
+      </p>
+    </div>
+
+    <div class="blog-post">
+      <h3>💬 Customer Style Moments</h3>
+      <p>See how our beautiful customers style their Floral Collection outfits — and get featured on our page!</p>
+    </div>
+  </div>
+
+  <footer class="site-footer" id="about-section">
+    <div class="footer-top">
+      <div class="footer-newsletter">
+        <h4>Sign up and save</h4>
+        <p>Get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+        <form>
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <div class="link-group">
+        <h5>Collections</h5>
+        <ul>
+          <li><a href="#">Chiffon Hijabs</a></li>
+          <li><a href="#">Silk Hijabs</a></li>
+          <li><a href="#">Glitter Georgette Hijabs</a></li>
+          <li><a href="#">Jersey Hijabs</a></li>
+          <li><a href="#">Hijab Deals</a></li>
+        </ul>
+      </div>
+      <div class="link-group">
+        <h5>About</h5>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('our-story-popup').style.display='block'">Our Story</a></li>
+          <li><a href="#" onclick="document.getElementById('contact-popup').style.display='block'">Contact Us</a></li>
+          <li><a href="#" onclick="document.getElementById('blog-popup').style.display='block'">Blog</a></li>
+
+        </ul>
+      </div>
+      <div class="link-group">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('terms-popup').style.display='block'">Terms of Service</a>
+          </li>
+          <li><a href="#" onclick="document.getElementById('policy-popup').style.display='block'">Privacy Policy</a>
+          </li>
+          <li><a href="#" onclick="document.getElementById('return-popup').style.display='block'">Return Policy</a></li>
+
+        </ul>
+      </div>
+      <div class="social-group">
+        <h5>Follow Us</h5>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/floralcollection_01/" target="_blank" aria-label="Instagram">
+            <img src="icon-instagram.svg" alt="Instagram">
+            <a href="https://www.instagram.com/floralcollection_01/" target="_blank" aria-label="Instagram"><img
+                src="icon-facebook.svg" alt="Facebook"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Floral Collection. All rights reserved.</p>
+    </div>
+  </footer>
+<script src="cart.js"></script>
+ <script src="styles.js"></script>
+</body>
+</html>
