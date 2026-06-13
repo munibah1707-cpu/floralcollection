@@ -1,6 +1,6 @@
 // ====== CART CONFIG ======
 const STORE_EMAIL = "floralcollection001@gmail.com";
-const WHATSAPP_NUMBER = "923254126023";
+const WHATSAPP_NUMBER = "92 000 0000000";
 const STORAGE_KEY = "floral_cart";
 const FREE_DELIVERY_THRESHOLD = 5000;
 const DEFAULT_DELIVERY = 300;
