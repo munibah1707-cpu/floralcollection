@@ -1304,11 +1304,26 @@ button,
 /* Hide class used by JS */
 .chiffon-hidden { display: none !important; }
 
-/* Show-more button container */
-.show-more-container {
-  text-align: center;
-  margin-top: 18px;
-  padding: 0 10px;
+/* SEE MORE button */
+.see-more-btn {
+  display: inline-block;
+  align-self: start;     /* stops it stretching to the row height */
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #b85979;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.see-more-btn:hover {
+  background: #8f3e5c;   /* darker pink instead of dark green */
+  transform: translateY(-2px);
 }
 
 /* Button styling */
